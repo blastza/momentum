@@ -1,0 +1,39 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: momentum
+  datasource:
+    url: jdbc:postgresql://localhost:5432/investments_db
+    username: ldamuleli
+    password: Lodav72#
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  #flyway:
+    #baselineOnMigrate: true
+    #schema: public
+    #enabled: true
+    #user: ldamuleli
+    #password: Lodav72#
+    #baseline-description: "init"
+    #baseline-version: 0
+
+security:
+  jwt:
+    secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    token-duration: 1D
+
+twilio:
+  account_sid: AC38a464c65479aab51987508443d87bf1
+  auth_token: c2dad6be7e2919bf8a878d5b40153217
+  trial_number: +27603824248
