@@ -5,5 +5,7 @@ Automating the withdrawal process for its investors
 http://localhost:8081/swagger-ui/index.html
 
 ```
-Todo: refactor error validation properly and exception handling
+Todo:
+* refactor error validation properly and exception handling
+* adding send mail for notification on the process
 ```
