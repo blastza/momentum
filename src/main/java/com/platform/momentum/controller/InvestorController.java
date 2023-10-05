@@ -53,21 +53,45 @@ public class InvestorController {
         return ResponseEntity.ok(investorService.findInvestorById(investor_id));
     }
 
+    @Operation(summary = "retrieve all investor details in the database")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "403", description = "Unauthorized - no token available"),
+            @ApiResponse(responseCode = "400", description = "Bad request - something is wrong with the request")
+    })
     @GetMapping("/investor/all")
     public ResponseEntity<List<Investor>> retrieveAllInvestorsDetails(){
         return ResponseEntity.ok(investorService.findAllInvestors());
     }
 
+    @Operation(summary = "Add products to an investor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "403", description = "Unauthorized - no token available"),
+            @ApiResponse(responseCode = "400", description = "Bad request - something is wrong with the request")
+    })
     @PostMapping("/link-product")
     public ResponseEntity<Investor> linkProduct(@RequestBody InvestorLinkProductRequest request){
         return ResponseEntity.ok(investorService.saveInvestor(request));
     }
 
+    @Operation(summary = "retrieve products linked to an investor by email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "403", description = "Unauthorized - no token available"),
+            @ApiResponse(responseCode = "400", description = "Bad request - something is wrong with the request")
+    })
     @GetMapping("/investor/products/{email}")
     public ResponseEntity<List<Product>> retrieveAllInvestorsProducts(@PathVariable String email){
         return ResponseEntity.ok(productService.findAllProductsLinkedToInvestor(email));
     }
 
+    @Operation(summary = "withdraw from a given product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "403", description = "Unauthorized - no token available"),
+            @ApiResponse(responseCode = "400", description = "Bad request - something is wrong with the request")
+    })
     @PutMapping("/investor/withdraw")
     public ResponseEntity<WithdrawalResponse> withdraw(@RequestBody WithdrawalRequest request){
         return ResponseEntity.ok(investorService.withdrawal(request));

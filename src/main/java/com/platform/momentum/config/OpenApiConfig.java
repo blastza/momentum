@@ -13,8 +13,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
-                        name = "investment",
-                        email = "contact@investmentplatform.com",
+                        name = "momentum",
+                        email = "lutendo.damuleli@outlook.com",
                         url = "https://investmentplatform.com/course"
                 ),
                 description = "withdrawal process for platform investors",
