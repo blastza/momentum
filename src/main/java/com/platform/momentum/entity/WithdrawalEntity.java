@@ -19,4 +19,6 @@ public class WithdrawalEntity {
     private Double withdrawal_amount;
     private String accountNumber;
     private String referenceName;
+/*    @ManyToOne
+    private Investor investor;*/
 }

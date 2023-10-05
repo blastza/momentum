@@ -1,5 +1,6 @@
 package com.platform.momentum.controller;
 
+import com.platform.momentum.exception.UnauthorizedInvestorException;
 import com.platform.momentum.model.InvestorLinkProductRequest;
 import com.platform.momentum.model.WithdrawalRequest;
 import com.platform.momentum.model.WithdrawalResponse;
@@ -8,6 +9,9 @@ import com.platform.momentum.model.domain.Product;
 import com.platform.momentum.security.UserPrincipal;
 import com.platform.momentum.service.InvestorService;
 import com.platform.momentum.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,22 +27,33 @@ public class InvestorController {
     private final InvestorService investorService;
     private final ProductService productService;
 
-    //service for retrieving back investor details using email
-    @GetMapping("/investor-details/{email}")
+    @Operation(summary = "retrieve investor details by email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "403", description = "Unauthorized - no token available"),
+            @ApiResponse(responseCode = "400", description = "Bad request - something is wrong with the request")
+    })
+    @GetMapping("/investor/get-by-email/{email}")
     public ResponseEntity<Investor> retrieveInvestorDetailsByEmail(@AuthenticationPrincipal UserPrincipal principal,
                                                                                @PathVariable String email){
+        if(!(principal.getEmail().equals(email)))
+            throw new UnauthorizedInvestorException("Not Authorised, email don't match with security");
         return ResponseEntity.ok(investorService.findInvestorByEmail(email));
     }
 
-    //service for retrieving back investor details using email
-    @GetMapping("/investor-details/{investor_id}/byId")
+    @Operation(summary = "retrieve investor details by investor_id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "403", description = "Unauthorized - no token available"),
+            @ApiResponse(responseCode = "400", description = "Bad request - something is wrong with the request")
+    })
+    @GetMapping("/investor/get-by-id/{investor_id}")
     public ResponseEntity<Investor> retrieveInvestorDetailsById(@AuthenticationPrincipal UserPrincipal principal,
                                                                    @PathVariable Integer investor_id){
         return ResponseEntity.ok(investorService.findInvestorById(investor_id));
     }
 
-    //service for retrieving back all investor details
-    @GetMapping("/investor-details")
+    @GetMapping("/investor/all")
     public ResponseEntity<List<Investor>> retrieveAllInvestorsDetails(){
         return ResponseEntity.ok(investorService.findAllInvestors());
     }
@@ -48,7 +63,6 @@ public class InvestorController {
         return ResponseEntity.ok(investorService.saveInvestor(request));
     }
 
-    //Get product byEmail
     @GetMapping("/investor/products/{email}")
     public ResponseEntity<List<Product>> retrieveAllInvestorsProducts(@PathVariable String email){
         return ResponseEntity.ok(productService.findAllProductsLinkedToInvestor(email));

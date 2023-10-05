@@ -2,6 +2,7 @@ package com.platform.momentum.exception.handler;
 
 import com.platform.momentum.exception.InvestorException;
 import com.platform.momentum.exception.InvestorNotFoundException;
+import com.platform.momentum.exception.UnauthorizedInvestorException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,5 +21,17 @@ public class InvestorExceptionHandler {
         );
 
         return new ResponseEntity<>(investorException, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {UnauthorizedInvestorException.class})
+    public ResponseEntity<Object> handleInvestorNotFoundException
+            (UnauthorizedInvestorException exception){
+        InvestorException investorException = new InvestorException(
+                exception.getMessage(),
+                exception.getCause(),
+                HttpStatus.UNAUTHORIZED
+        );
+
+        return new ResponseEntity<>(investorException, HttpStatus.UNAUTHORIZED);
     }
 }

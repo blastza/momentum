@@ -1,6 +1,7 @@
 com/platform/momentum/model/InvestorLinkProductRequest.class
 com/platform/momentum/security/UserPrincipalAuthenticationToken.class
 com/platform/momentum/exception/handler/GlobalExceptionHandler.class
+com/platform/momentum/config/OpenApiConfig.class
 com/platform/momentum/security/JwtProperties.class
 com/platform/momentum/entity/WithdrawalEntity$WithdrawalEntityBuilder.class
 com/platform/momentum/controller/HelloController.class
