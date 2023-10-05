@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "8ece74d4-45cc-441d-a0e5-130484ae0806",
+		"name": "momentum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30238444"
+	},
+	"item": [
+		{
+			"name": "getByInvestorId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjk2NDU2MDYzLCJlIjoibHV0ZW5kby5kYW11bGVsaUBnbWFpbC5jb20iLCJhIjpbIklOVkVTVE9SIl19.Myf9soTlFxQcsIXg2d7Od4J-cMZlxRDYcuKCSVRG1T8"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8081/api/v1/investment/investor-details/1/byId",
+				"description": "retrieve investor details using investor_id"
+			},
+			"response": []
+		},
+		{
+			"name": "authToken",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\" : \"lutendo.damuleli@gmail.com\",\n    \"password\" : \"Lodav72#\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8081/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "byEmail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8081/api/v1/investment/investor-details/lutendo.damuleli@gmail.com"
+			},
+			"response": []
+		},
+		{
+			"name": "getLinkedProductsToUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjk2NDU2MDYzLCJlIjoibHV0ZW5kby5kYW11bGVsaUBnbWFpbC5jb20iLCJhIjpbIklOVkVTVE9SIl19.Myf9soTlFxQcsIXg2d7Od4J-cMZlxRDYcuKCSVRG1T8"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8081/api/v1/investment/investor/products/lutendo.damuleli@gmail.com"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllInvestors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8081/api/v1/investment/investor-details"
+			},
+			"response": []
+		},
+		{
+			"name": "withdraw",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8081/api/v1/investment/investor/withdraw"
+			},
+			"response": []
+		}
+	]
+}
